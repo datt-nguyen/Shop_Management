@@ -1,5 +1,7 @@
 package com.example.management_shop.Entity;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import jakarta.persistence.*;
 
@@ -12,15 +14,21 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@ToString(exclude = "password")
 public class Users {
 @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+@NotBlank
+@Column(nullable = false)
     private String fullname;
-    @Column(nullable = false, unique = true)
+@Email
+@Column(nullable = false, unique = true)
     private String email;
-    @Column(nullable = false)
+@NotBlank
+@Column(nullable = false)
     private String password;
     private String address;
+    @Column(unique = true)
     private String phone;
     private Boolean status = true;
 @ManyToMany(fetch = FetchType.EAGER)

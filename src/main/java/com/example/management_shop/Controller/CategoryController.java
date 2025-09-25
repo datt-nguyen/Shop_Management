@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.example.management_shop.Service.CategoryService;
 import com.example.management_shop.Entity.Category;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 import java.util.List;
 @RestController
@@ -14,6 +15,7 @@ public class CategoryController {
     private final CategoryService categoryService;
 
     @GetMapping
+    @PreAuthorize("hasRole('MANAGEMENT')")
     public List<Category> getAllCategories() { return categoryService.getAllCategories(); }
 
     @PostMapping
